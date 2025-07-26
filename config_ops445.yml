@@ -1,0 +1,29 @@
+---
+- name: Lab 8 - Configure remote system
+  hosts: ops445b
+  become: yes
+  tasks:
+    - name: Ensure firewalld is installed
+      yum:
+        name: firewalld
+        state: present
+
+    - name: Ensure firewalld is running and enabled
+      service:
+        name: firewalld
+        state: started
+        enabled: true
+
+    - name: Ensure tree is installed
+      yum:
+        name: tree
+        state: present
+
+    - name: Create a file named lab8_[seneca_id].txt
+      copy:
+        dest: /home/student/lab8_169475233.txt
+        content: "Lab 8 completed by Eroshy (Student ID: 169475233)\n"
+        owner: student
+        group: student
+        mode: '0644'
+
